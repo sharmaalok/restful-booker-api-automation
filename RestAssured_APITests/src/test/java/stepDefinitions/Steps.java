@@ -75,7 +75,6 @@ public class Steps {
         Assert.assertTrue(bookingids.size() > 0);
         bookingId = bookingids.get(0).get("bookingid");
         Assert.assertNotNull(bookingId);
-        System.out.println("bookingid is "+bookingId);
     }
 
     @When("A specific bookingId from the list is entered via GetBooking API")
@@ -95,24 +94,18 @@ public class Steps {
         JsonPath jsonPathEvaluator = response.jsonPath();
         bookingfirstname = jsonPathEvaluator.get("firstname");
         Assert.assertNotNull(bookingfirstname);
-        System.out.println("bookingfirstname is "+bookingfirstname);
 
         bookinglastname = jsonPathEvaluator.get("lastname");
         Assert.assertNotNull(bookinglastname);
-        System.out.println("bookinglastname is "+bookinglastname);
 
         Integer bookingtotalprice = jsonPathEvaluator.get("totalprice");
         Assert.assertNotNull(bookingtotalprice);
-        System.out.println("bookingtotalprice is "+bookingtotalprice);
 
         String bookingcheckindate = jsonPathEvaluator.get("bookingdates.checkin");
         Assert.assertNotNull(bookingcheckindate);
-        System.out.println("bookingcheckindate is "+bookingcheckindate);
 
         String bookingcheckoutdate = jsonPathEvaluator.get("bookingdates.checkout");
         Assert.assertNotNull(bookingcheckoutdate);
-        System.out.println("bookingcheckoutdate is "+bookingcheckoutdate);
-
     }
 
 
@@ -133,7 +126,6 @@ public class Steps {
         Assert.assertTrue(bookingids.size() > 0);
         Integer bookingIdByname = bookingids.get(0).get("bookingid");
         Assert.assertNotNull(bookingIdByname);
-        System.out.println("bookingIdByname is "+bookingIdByname);
     }
 
     @When("Booking is fetched with Date filters via GetBooking API")
@@ -147,12 +139,10 @@ public class Steps {
         Assert.assertEquals(200,statusCode);
 
         jsonString = response.asString();
-        System.out.println("response is "+jsonString);
         List<Map<String, Integer>> bookingids = JsonPath.from(jsonString).get();
         Assert.assertTrue(bookingids.size() > 0);
         Integer bookingidsbyDate = bookingids.get(0).get("bookingid");
         Assert.assertNotNull(bookingidsbyDate);
-        System.out.println("bookingIdByname is "+bookingidsbyDate);
     }
 
     @Then("Date filtered booking details are retrieved correctly")
@@ -166,12 +156,10 @@ public class Steps {
         Assert.assertEquals(200,statusCode);
 
         jsonString = response.asString();
-        System.out.println("response is "+jsonString);
         List<Map<String, Integer>> bookingids = JsonPath.from(jsonString).get();
         Assert.assertTrue(bookingids.size() > 0);
         Integer bookingidsbyDate = bookingids.get(0).get("bookingid");
         Assert.assertNotNull(bookingidsbyDate);
-        System.out.println("bookingIdByname is "+bookingidsbyDate);
     }
 
     @Given("A new booking is created via CreateBooking API")
@@ -193,20 +181,16 @@ public class Steps {
         Assert.assertEquals(200, statusCode);
 
         jsonString = response.asString();
-        System.out.println("response is "+jsonString);
 
         JsonPath jsonPathEvaluator = response.jsonPath();
         Createdbookingid = jsonPathEvaluator.get("bookingid");
         Assert.assertNotNull(Createdbookingid);
-        System.out.println("bookingid is "+Createdbookingid);
 
         String CreatedFirstName = jsonPathEvaluator.get("booking.firstname");
         Assert.assertNotNull(CreatedFirstName);
-        System.out.println("CreatedFirstName is "+CreatedFirstName);
 
         String CreatedLastName = jsonPathEvaluator.get("booking.lastname");
         Assert.assertNotNull(CreatedLastName);
-        System.out.println("CreatedLastName is "+CreatedLastName);
     }
 
     @Then("Booking created should be available for update via UpdateBooking API")
@@ -231,36 +215,29 @@ public class Steps {
         Assert.assertEquals(200, statusCode);
 
         jsonString = response.asString();
-        System.out.println("response is "+jsonString);
 
         JsonPath jsonPathEvaluator = response.jsonPath();
 
         String UpdatedFirstName = jsonPathEvaluator.get("firstname");
         Assert.assertEquals("Test-Update",UpdatedFirstName);
-        System.out.println("UpdatedFirstName is "+UpdatedFirstName);
 
         String UpdatedLastName = jsonPathEvaluator.get("lastname");
         Assert.assertEquals("Jim-Update",UpdatedLastName);
-        System.out.println("UpdatedLastName is "+UpdatedLastName);
 
         Integer Updatedtotalprice = jsonPathEvaluator.get("totalprice");
         Assert.assertNotNull(Updatedtotalprice);
 
         Boolean Updateddepositpaid = jsonPathEvaluator.get("depositpaid");
         Assert.assertFalse(Updateddepositpaid);
-        System.out.println("Updateddepositpaid is "+Updateddepositpaid);
 
         String Updatedcheckin = jsonPathEvaluator.get("bookingdates.checkin");
         Assert.assertEquals("2018-02-01",Updatedcheckin);
-        System.out.println("Updatedcheckin is "+Updatedcheckin);
 
         String Updatedcheckout = jsonPathEvaluator.get("bookingdates.checkout");
         Assert.assertEquals("2019-10-01",Updatedcheckout);
-        System.out.println("Updatedcheckout is "+Updatedcheckout);
 
         String Updatedadditionalneeds = jsonPathEvaluator.get("additionalneeds");
         Assert.assertEquals("Babybedje",Updatedadditionalneeds);
-        System.out.println("Updatedadditionalneeds is "+Updatedadditionalneeds);
     }
 
     @When("Booking is updated with a partial payload via PartialUpdateBooking")
@@ -279,28 +256,22 @@ public class Steps {
 
     @Then("partial update should be successfull")
     public void response_PartialUpdateBooking() {
-        System.out.println("response is "+response.asString());
-        System.out.println("id is "+Createdbookingid);
 
         int statusCode = response.getStatusCode();
         Assert.assertEquals(200, statusCode);
 
         jsonString = response.asString();
-        System.out.println("response is "+jsonString);
 
         JsonPath jsonPathEvaluator = response.jsonPath();
 
         String partialUpdatedFirstName = jsonPathEvaluator.get("firstname");
         Assert.assertEquals("Test-PartialUpdate",partialUpdatedFirstName);
-        System.out.println("partialUpdatedFirstName is "+partialUpdatedFirstName);
 
         String partialUpdatedLastName = jsonPathEvaluator.get("lastname");
         Assert.assertEquals("Jim-PartialUpdate",partialUpdatedLastName);
-        System.out.println("partialUpdatedLastName is "+partialUpdatedLastName);
 
         String partialUpdatedadditionalneeds = jsonPathEvaluator.get("additionalneeds");
         Assert.assertEquals("Extra bed",partialUpdatedadditionalneeds);
-        System.out.println("partialUpdatedadditionalneeds is "+partialUpdatedadditionalneeds);
     }
 
     @Given("Previously created booking is deleted via DeleteBooking API")
