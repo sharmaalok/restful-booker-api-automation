@@ -27,15 +27,3 @@ Feature: Automated E2E tests
     Given Previously created booking is deleted via DeleteBooking API
     When Booking details for deleted bookingid are fetched again via GetBooking API
     Then No Details should be retrieved
-
-#  Scenario: Authorized user is able to get booking id's
-#   Given A list of bookings are available without filters
-#    When booking details are available when specific bookingId is entered
-#    When A list of bookings are available by Name filters
-#    When A list of bookings are available By Date filters
-#
-#    Given A new booking is created
-#   When A current booking is updated completely
-#  When A current booking is updated with a partial payload
-#  Given A current booking is deleted
-#
